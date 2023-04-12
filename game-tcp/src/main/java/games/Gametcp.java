@@ -1,3 +1,5 @@
+package games;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
@@ -123,9 +125,9 @@ public class Gametcp extends JFrame implements Runnable {
     // throw new UnsupportedOperationException("Not supported yet.");
     // }
 
-    public static void main(String[] args) {
-        new Gametcp().setVisible(true);
-    }
+    // public static void main(String[] args) {
+    // new Gametcp().setVisible(true);
+    // }
     // Variables declaration - do not modify
     // End of variables declaration
 }
