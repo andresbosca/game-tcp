@@ -1,6 +1,5 @@
 package games;
 
-import java.awt.Color;
 import java.awt.Graphics;
 
 public class Player {
@@ -9,8 +8,7 @@ public class Player {
     private final int mouthAngle = 160;
     private final int mouthLength = 10;
     private final int eyeRadius = 5;
-    private final int eyeDistance = 10;
-    private final int eyeAngle = 45;
+    private final int eyeDistance = 9;
     private int x = 0, y = 0;
 
     public Player(int x, int y) {
@@ -28,19 +26,12 @@ public class Player {
         gr.drawOval(this.x - this.eyeDistance, this.y - this.eyeDistance, this.eyeRadius, this.eyeRadius);
         gr.drawOval(this.x + this.eyeDistance, this.y - this.eyeDistance, this.eyeRadius, this.eyeRadius);
         // mouth
-        gr.setColor(new Color(120, 120, 120));
-        gr.drawArc(this.x - this.mouthLength, this.y + this.mouthLength, this.mouthLength, this.mouthLength, 0,
-                this.mouthAngle);
-        gr.setColor(new Color(80, 80, 80));
-        gr.drawArc(this.x - this.mouthLength, this.y + this.mouthLength, this.mouthLength, this.mouthLength, 180,
-                this.mouthAngle);
-        gr.setColor(new Color(40, 40, 40));
-        gr.drawArc(this.x - this.mouthLength, this.y + this.mouthLength, this.mouthLength, this.mouthLength, 360,
+        gr.drawArc(this.x - this.mouthLength + 2, this.y + 2,
+                this.mouthLength * 2, this.mouthLength, 180,
                 this.mouthAngle);
         // body
         gr.drawOval(this.x - this.circleRadius, this.y - this.circleRadius, this.circleRadius * 2,
                 this.circleRadius * 2);
-
     }
 
 }
