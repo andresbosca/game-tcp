@@ -2,6 +2,7 @@ package games;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Polygon;
 import java.awt.event.KeyEvent;
 
 import javax.swing.JFrame;
@@ -50,10 +51,12 @@ public class Gametcp extends JFrame implements Runnable {
     public void paint(Graphics gr) {
         gr.clearRect(0, 0, getWidth(), getHeight());
         gr.setColor(new Color(r, g, b));
-        gr.drawRect(50 + x, 50 + y, 50, 50);
+        Player player = new Player(500 + x, 400 + y);
+        player.draw(gr);
+        // gr.drawRect(50 + x, 50 + y, 50, 50);
 
         for (int i = 0; i < 10; i++) {
-            gr.setColor(new Color(i * 2, i * 3, i * 4));
+            gr.setColor(new Color(i * 2, i * 8, i * 14));
             gr.drawOval(vetX[i], vetY[i], 5, 5);
         }
 
@@ -120,14 +123,4 @@ public class Gametcp extends JFrame implements Runnable {
 
         }
     }
-
-    // private Color Color(int r, Graphics g, int b) {
-    // throw new UnsupportedOperationException("Not supported yet.");
-    // }
-
-    // public static void main(String[] args) {
-    // new Gametcp().setVisible(true);
-    // }
-    // Variables declaration - do not modify
-    // End of variables declaration
 }
