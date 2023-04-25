@@ -2,16 +2,18 @@ package games;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Polygon;
 import java.awt.event.KeyEvent;
+import java.util.Random;
 
 import javax.swing.JFrame;
 
 public class Gametcp extends JFrame implements Runnable {
 
+    private final int LAYOUT_WIDTH = 600;
+    private final int LAYOUT_HEIGHT = 500;
+
     private int x = 0;
     private int y = 0;
-    private int r, g, b;
     private int tendenciaX, tendenciaY;
 
     private int vetX[] = new int[10];
@@ -19,9 +21,10 @@ public class Gametcp extends JFrame implements Runnable {
 
     public Gametcp() {
         initComponents();
+        Random rand = new Random();
         for (int i = 0; i < 10; i++) {
-            vetX[i] = getWidth() / 2;
-            vetY[i] = getHeight() / 2;
+            vetX[i] = rand.nextInt(LAYOUT_WIDTH - 150) + 26;
+            vetY[i] = rand.nextInt(LAYOUT_HEIGHT - 150) + 26;
         }
         new Thread(this).start();
     }
@@ -39,10 +42,10 @@ public class Gametcp extends JFrame implements Runnable {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 643, Short.MAX_VALUE));
+                        .addGap(0, LAYOUT_WIDTH, Short.MAX_VALUE));
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 466, Short.MAX_VALUE));
+                        .addGap(0, LAYOUT_HEIGHT, Short.MAX_VALUE));
 
         pack();
     }// </editor-fold>
@@ -50,8 +53,8 @@ public class Gametcp extends JFrame implements Runnable {
     @Override
     public void paint(Graphics gr) {
         gr.clearRect(0, 0, getWidth(), getHeight());
-        gr.setColor(new Color(r, g, b));
-        Player player = new Player(500 + x, 400 + y);
+        gr.setColor(new Color(0, 0, 0));
+        Player player = new Player(500 + x, 450 + y);
         player.draw(gr);
         // gr.drawRect(50 + x, 50 + y, 50, 50);
 
@@ -61,7 +64,6 @@ public class Gametcp extends JFrame implements Runnable {
         }
 
         if (Math.random() > 0.9) {
-
             tendenciaX = 2;
             tendenciaY = 2;
         } else {
@@ -83,38 +85,12 @@ public class Gametcp extends JFrame implements Runnable {
         if (evt.getKeyCode() == KeyEvent.VK_RIGHT) {
             x = x + 1;
         }
-
-        if (evt.getKeyCode() == KeyEvent.VK_R) {
-            r = r + 4;
-        }
-        if (evt.getKeyCode() == KeyEvent.VK_F) {
-            r = r - 4;
-        }
-
-        if (evt.getKeyCode() == KeyEvent.VK_G) {
-            g = g + 4;
-        }
-        if (evt.getKeyCode() == KeyEvent.VK_V) {
-            g = g - 4;
-        }
-
-        if (evt.getKeyCode() == KeyEvent.VK_B) {
-            b = b + 4;
-        }
-        if (evt.getKeyCode() == KeyEvent.VK_N) {
-            b = b - 4;
-        }
-
     }
 
     @Override
     public void run() {
         while (true) {
             try {
-                for (int i = 0; i < 10; i++) {
-                    vetX[i] = vetX[i] + (int) (Math.random() * 5) - 2 + tendenciaX;
-                    vetY[i] = vetY[i] + (int) (Math.random() * 5) - 2 + tendenciaY;
-                }
                 Thread.sleep(100);
                 repaint();
             } catch (Exception e) {
